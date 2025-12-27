@@ -1,0 +1,1 @@
+export const currencyFormatter = new Intl.NumberFormat("bs-BA", { style: "currency", currency: "BAM" })

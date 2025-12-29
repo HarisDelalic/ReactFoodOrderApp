@@ -1,5 +1,4 @@
-import React from 'react';
-import { createContext, useReducer } from 'react';
+import React, {useReducer} from 'react';
 
 const CartContext = React.createContext({
     items: [],
@@ -27,7 +26,26 @@ const cartReducer = (state, action) => {
 
         return { ...state, items: updatedItems };
     }
-    // REMOVE logic ...
+
+    if (action.type === 'REMOVE_ITEM') {
+        const existingCartItemIndex = state.items.findIndex(
+            (item) => item.id === action.id
+        );
+        const existingCartItem = state.items[existingCartItemIndex];
+
+        const updatedItems = [...state.items];
+
+        if (existingCartItem.quantity === 1) {
+            updatedItems.splice(existingCartItemIndex, 1);
+        } else {
+            updatedItems[existingCartItemIndex] = {
+                ...existingCartItem,
+                quantity: existingCartItem.quantity - 1,
+            };
+        }
+
+        return { ...state, items: updatedItems };
+    }
 
     return state;
 };

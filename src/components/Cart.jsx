@@ -15,6 +15,10 @@ export default function Cart() {
         0
     );
 
+    const handleCloseModal = () => {
+        userProgressContext.hideCart();
+    }
+
     console.log("rendering CART")
     return (
         <Modal className="cart" open={userProgressContext.progress === "cart"}>
@@ -26,10 +30,10 @@ export default function Cart() {
             </ul>
             <p className="cart-total">{currencyFormatter.format(cartTotal)}</p>
             <p className="modal-actions">
-                <Button textOnly>
+                <Button textOnly onClick={handleCloseModal}>
                     Close
                 </Button>
-                <Button>Go to Checkout</Button>
+                <Button onClick={handleCloseModal}>Go to Checkout</Button>
             </p>
         </Modal>
     );

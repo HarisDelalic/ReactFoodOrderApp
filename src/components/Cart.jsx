@@ -24,13 +24,12 @@ export default function Cart() {
         userProgressContext.showCheckout();
     }
 
-    console.log("rendering CART")
     return (
         <Modal className="cart" open={userProgressContext.progress === "cart"} onClose={userProgressContext.progress === "cart" ? handleCloseModal : null}>
             <h2>Your Cart</h2>
             <ul>
                 {cartContext.items.map((item) => (
-                    <CartItem name={item.name} quantity={item.quantity} price={item.price}
+                    <CartItem key={item.id} name={item.name} quantity={item.quantity} price={item.price}
                               onIncrease={() => cartContext.addItem(item)} onDecrease={() => cartContext.removeItem(item.id)} />
                 ))}
             </ul>
